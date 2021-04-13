@@ -57,7 +57,7 @@ router.post("/dashboard/:post/courseRegister", function(req, res) {
                 if (err) {
                   res.send({Error:"Something Went Wrong"});
                 } else {
-                  console.log(tdetails);
+                
                   if (tdetails.teacherId) {
                     const tid = tdetails.teacherId;
                     Teacher.findOne({
