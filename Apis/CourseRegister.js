@@ -41,6 +41,7 @@ router.post("/dashboard/:post/courseRegister", function(req, res) {
             res.send({Error:"Something Went Wrong"});
         } else {
           if (results) {
+
             const uid = results._id;
             const fName = results.fName;
             const lName = results.lName;
@@ -48,6 +49,7 @@ router.post("/dashboard/:post/courseRegister", function(req, res) {
 
               const clas = req.body.class;
               const subjec = req.body.subject;
+
               Allotment.findOne({
                 class: clas,
                 subject: subjec
@@ -55,6 +57,7 @@ router.post("/dashboard/:post/courseRegister", function(req, res) {
                 if (err) {
                   res.send({Error:"Something Went Wrong"});
                 } else {
+                  console.log(tdetails);
                   if (tdetails.teacherId) {
                     const tid = tdetails.teacherId;
                     Teacher.findOne({
@@ -79,7 +82,7 @@ router.post("/dashboard/:post/courseRegister", function(req, res) {
                             date:[],
                           })
                           Course.findOne({
-                            id: uid,
+                            username:username,
                             class: clas,
                             subject: subjec
                           }, function(err, course) {
@@ -119,7 +122,7 @@ router.post("/dashboard/:post/courseRegister", function(req, res) {
                       date:[],
                     })
                     Course.findOne({
-                      id: uid,
+                      username:username,
                       class: clas,
                       subject: subjec
                     }, function(err, course) {
@@ -182,7 +185,7 @@ router.post("/dashboard/:post/courseRegister", function(req, res) {
                 if (err)   res.send({Error:"Something Went Wrong"});
                 else {
                   tdetails.save(function(err) {
-                    if (!err) {
+                    if (!course) {
                       res.send("CourseRegistered");
                     } else {
                         res.send({Error:"Course Already Registered"});
