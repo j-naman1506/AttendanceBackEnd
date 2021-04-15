@@ -30,7 +30,7 @@ const Allotment=new mongoose.model("Allotment",AllotmentSchema);
 router.post("/dashboard/:post/courseRegister", function(req, res) {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const decodedToken = jwt.verify(token, process.env.SECRET);
     const userId = decodedToken.userId;
     const post = req.params.post;
     if (post === "Student") {
@@ -57,7 +57,7 @@ router.post("/dashboard/:post/courseRegister", function(req, res) {
                 if (err) {
                   res.send({Error:"Something Went Wrong"});
                 } else {
-                
+
                   if (tdetails.teacherId) {
                     const tid = tdetails.teacherId;
                     Teacher.findOne({

@@ -29,7 +29,7 @@ const Allotment=new mongoose.model("Allotment",AllotmentSchema);
 router.get("/dashboard/Host/AllotmentData",async function(req,res){
   try{
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const decodedToken = jwt.verify(token, process.env.SECRET);
     const userId = decodedToken.userId;
     Host.findOne({username:userId},async function(err,resp){
       if(err){
@@ -87,7 +87,7 @@ router.get("/dashboard/Host/AllotmentData",async function(req,res){
 
      const token = req.headers.authorization.split(' ')[1];
 
-     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+     const decodedToken = jwt.verify(token, process.env.SECRET);
      const userId = decodedToken.userId;
 
      Host.findOne({username:userId},function(err,results){
@@ -149,7 +149,7 @@ router.get("/dashboard/Host/AllotmentData",async function(req,res){
  router.post("/dashboard/host/fetchTedata",function(req,res){
    try{
      const token = req.headers.authorization.split(' ')[1];
-     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+     const decodedToken = jwt.verify(token, process.env.SECRET);
      const userId = decodedToken.userId;
      Host.findOne({username:userId},function(err,results){
        if(err){

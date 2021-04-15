@@ -30,7 +30,7 @@ const Allotment=new mongoose.model("Allotment",AllotmentSchema);
 router.post("/dashboard/Teacher/MarkAttendance", function(req, res) {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const decodedToken = jwt.verify(token, process.env.SECRET);
     const userId = decodedToken.userId;
     Teacher.findOne({
       username: userId
@@ -124,7 +124,7 @@ router.post("/dashboard/Teacher/MarkAttendance", function(req, res) {
 router.post("/dashboard/Teacher/fetchAttendance", function(req, res) {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const decodedToken = jwt.verify(token, process.env.SECRET);
     const userId = decodedToken.userId;
       Teacher.findOne({username:userId},function(err,results){
         if(err){

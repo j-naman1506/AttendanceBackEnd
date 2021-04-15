@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -21,7 +22,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
  app.use(express.static(__dirname + '/uploads'));
 app.use(bodyParser.json())
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: process.env.SITE_URL,
     optionsSuccessStatus: 200, // For legacy browser support
     methods: "GET, POST",
 }

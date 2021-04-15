@@ -48,7 +48,7 @@ router.post("/login/:post", function(req, res) {
                     const token = jwt.sign({
                         userId: username
                       },
-                      'RANDOM_TOKEN_SECRET'
+                      process.env.SECRET
                     );
 
                     res.status(200).json({
@@ -81,7 +81,7 @@ router.post("/login/:post", function(req, res) {
                   const token = jwt.sign({
                       userId: username
                     },
-                    'RANDOM_TOKEN_SECRET'
+                    process.env.SECRET
                   );
 
                   res.status(200).json({
@@ -113,7 +113,7 @@ router.post("/login/:post", function(req, res) {
                 const token = jwt.sign({
                     userId: username
                   },
-                  'RANDOM_TOKEN_SECRET'
+                  process.env.SECRET
                 );
 
                 res.status(200).json({
